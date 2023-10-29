@@ -83,11 +83,12 @@ const form = document.querySelector('form');
 const createStudent = (e) => {
     e.preventDefault();
 
+    let houses = ["gryffindor","hufflepuff", "ravenclaw", "slytherin" ];
 
     const newStudentObj = {
         id: students.length + 1,
         name: document.querySelector("#name").value,
-        house: "gryffindor",
+        house: houses[Math.floor(Math.random() * houses.length)],
   
     };
     students.push(newStudentObj);
