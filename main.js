@@ -43,3 +43,36 @@ const renderToDom = (students) => {
     app.innerHTML = domString;
 }
 renderToDom(students);
+
+
+//TODO: Create filter function
+
+const showGryffindorButton = document.querySelector("#gryffindor");
+const showHufflepuffButton = document.querySelector("#hufflepuff");
+const showRavenClawButton = document.querySelector("#ravenclaw");
+const showSlytherinButton = document.querySelector("#slytherin");
+const showAllStudentsButton = document.querySelector("#allStudents");
+
+const filter = (array, houseString) => {
+    const studentsArray = [];
+  
+    for (const students of array) {
+      if (students.house === houseString) {
+        studentsArray.push(students);
+      }
+    }
+    return studentsArray;
+  };
+  //SIMPLIFIED CODE
+  // THE HANDLECLICK FUNCTION TAKES TYPE AND USES IT AS AN ARGUEMENT
+  
+  function handleFilterClick(house) {
+    const filteredStudents = house === "all" ? students : filter(students, house);
+    renderToDom(filteredStudents);
+  }
+  
+  showGryffindorButton.addEventListener("click", () => handleFilterClick("gryffindor"));
+  showHufflepuffButton.addEventListener("click", () => handleFilterClick("hufflepuff"));
+  showRavenClawButton.addEventListener("click", () => handleFilterClick("ravenclaw"));
+  showSlytherinButton.addEventListener("click", () => handleFilterClick("slytherin"));
+  showAllStudentsButton.addEventListener("click", () => handleFilterClick("all"));
