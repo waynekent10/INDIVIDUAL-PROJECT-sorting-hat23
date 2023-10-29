@@ -33,7 +33,7 @@ const renderToDom = (students) => {
           <div class="col-md-8">
             <div class="card-body">
               <h5 class="card-title">${student.name}</h5>
-              <p class="card-text">"${student.house}</p>
+              <p class="card-text">${student.house}</p>
               <a href="#" class="btn btn-danger" id="delete--${student.id}">Expel</a>
             </div>
           </div>
@@ -76,3 +76,24 @@ const filter = (array, houseString) => {
   showRavenClawButton.addEventListener("click", () => handleFilterClick("ravenclaw"));
   showSlytherinButton.addEventListener("click", () => handleFilterClick("slytherin"));
   showAllStudentsButton.addEventListener("click", () => handleFilterClick("all"));
+
+  //creates the form and places form on the dom
+const form = document.querySelector('form');
+
+const createStudent = (e) => {
+    e.preventDefault();
+
+
+    const newStudentObj = {
+        id: students.length + 1,
+        name: document.querySelector("#name").value,
+        house: "gryffindor",
+  
+    };
+    students.push(newStudentObj);
+    console.log(students.length);
+    renderToDom(students);
+    form.reset();
+};
+
+form.addEventListener('submit', createStudent);
