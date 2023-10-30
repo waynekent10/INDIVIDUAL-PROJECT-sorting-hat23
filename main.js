@@ -20,9 +20,32 @@ const students = [
     house: "slytherin",
   },
 ];
+
+
+//RenderToDom
+const renderToDom = (divId, htmlToRender) => {
+    const selectedDiv = document.querySelector(divId);
+    selectedDiv.innerHTML = htmlToRender;
+}
+
+
+// get form on dom
+const form = document.querySelector("#form");
+form.innerHTML += `<form id="studentForm">
+<div class="form-containter">
+<div class="form-floating mb-3">
+    <input type="text" class="form-control" id="name" placeholder="name" required>
+    <label for="floatingInput">Name</label>
+</div>
+<button class="btn btn-success" type="submit" id="submit">Sort</button>
+</div>
+</div>`;; 
+
+
+
 //TODO: Get the card on the DOM
 //Function to render cards to the DOM that takes an array
-const renderToDom = (students) => {
+const studentsOnDom = (students) => {
   let domString = "";
   students.forEach((student) => {
     domString += `<div class="card mb-3" style="max-width: 18rem;">
@@ -34,107 +57,128 @@ const renderToDom = (students) => {
             <div class="card-body">
               <h5 class="card-title">${student.name}</h5>
               <p class="card-text">${student.house}</p>
-              <a href="#" class="btn btn-danger" id="delete--${student.id}">Expel</a>
+              <a href="#" class="btn btn-danger" id="expel--${student.id}">Expel</a>
             </div>
           </div>
         </div>
         </div>`;
   })
-  const app = document.querySelector("#app");
-  app.innerHTML = domString;
+renderToDom("#hogwarts", domString);
 };
-renderToDom(students);
+// function to create a new student
+const createStudent = (e) => {
+     e.preventDefault();
+   //array for assigning houses
+   let houses = ["gryffindor", "hufflepuff", "ravenclaw", "slytherin"];
+  
+   const newStudentObj = {
+       id: students.length + 1,
+   name: document.querySelector("#name").value,
+      house: houses[Math.floor(Math.random() * houses.length)],
+  };
+   students.push(newStudentObj);
+    console.log(students.length);
+   renderToDom(students);
+    form.reset();
+  };
+  
+  // form.addEventListener("submit", createStudent);
+  
+
+
 
 //TODO: Create filter function
 
-const showGryffindorButton = document.querySelector("#gryffindor");
-const showHufflepuffButton = document.querySelector("#hufflepuff");
-const showRavenClawButton = document.querySelector("#ravenclaw");
-const showSlytherinButton = document.querySelector("#slytherin");
-const showAllStudentsButton = document.querySelector("#allStudents");
+// const showGryffindorButton = document.querySelector("#gryffindor");
+// const showHufflepuffButton = document.querySelector("#hufflepuff");
+// const showRavenClawButton = document.querySelector("#ravenclaw");
+// const showSlytherinButton = document.querySelector("#slytherin");
+// const showAllStudentsButton = document.querySelector("#allStudents");
 
-const filter = (array, houseString) => {
-  const studentsArray = [];
+// const filter = (array, houseString) => {
+//   const studentsArray = [];
 
-  for (const students of array) {
-    if (students.house === houseString) {
-      studentsArray.push(students);
-    }
-  }
-  return studentsArray;
-};
-//SIMPLIFIED CODE
-// THE HANDLECLICK FUNCTION TAKES TYPE AND USES IT AS AN ARGUEMENT
+//   for (const students of array) {
+//     if (students.house === houseString) {
+//       studentsArray.push(students);
+//     }
+//   }
+//   return studentsArray;
+// };
+// //SIMPLIFIED CODE
+// // THE HANDLECLICK FUNCTION TAKES TYPE AND USES IT AS AN ARGUEMENT
 
-function handleFilterClick(house) {
-  const filteredStudents = house === "all" ? students : filter(students, house);
-  renderToDom(filteredStudents);
-}
+// function handleFilterClick(house) {
+//   const filteredStudents = house === "all" ? students : filter(students, house);
+//   renderToDom(filteredStudents);
+// }
 
-showGryffindorButton.addEventListener("click", () =>
-  handleFilterClick("gryffindor")
-);
-showHufflepuffButton.addEventListener("click", () =>
-  handleFilterClick("hufflepuff")
-);
-showRavenClawButton.addEventListener("click", () =>
-  handleFilterClick("ravenclaw")
-);
-showSlytherinButton.addEventListener("click", () =>
-  handleFilterClick("slytherin")
-);
-showAllStudentsButton.addEventListener("click", () => handleFilterClick("all"));
+// showGryffindorButton.addEventListener("click", () =>
+//   handleFilterClick("gryffindor")
+// );
+// showHufflepuffButton.addEventListener("click", () =>
+//   handleFilterClick("hufflepuff")
+// );
+// showRavenClawButton.addEventListener("click", () =>
+//   handleFilterClick("ravenclaw")
+// );
+// showSlytherinButton.addEventListener("click", () =>
+//   handleFilterClick("slytherin")
+// );
+// showAllStudentsButton.addEventListener("click", () => handleFilterClick("all"));
 
-//creates the form and places form on the dom
-const form = document.querySelector("form");
+// //creates the form and places form on the dom
+// const form = document.querySelector("form");
 
-const createStudent = (e) => {
-  e.preventDefault();
- //array for assigning houses
-  let houses = ["gryffindor", "hufflepuff", "ravenclaw", "slytherin"];
+// const createStudent = (e) => {
+//   e.preventDefault();
+//  //array for assigning houses
+//   let houses = ["gryffindor", "hufflepuff", "ravenclaw", "slytherin"];
 
-  const newStudentObj = {
-    id: students.length + 1,
-    name: document.querySelector("#name").value,
-    house: houses[Math.floor(Math.random() * houses.length)],
-  };
-  students.push(newStudentObj);
-  console.log(students.length);
-  renderToDom(students);
-  form.reset();
-};
+//   const newStudentObj = {
+//     id: students.length + 1,
+//     name: document.querySelector("#name").value,
+//     house: houses[Math.floor(Math.random() * houses.length)],
+//   };
+//   students.push(newStudentObj);
+//   console.log(students.length);
+//   renderToDom(students);
+//   form.reset();
+// };
 
-form.addEventListener("submit", createStudent);
+// form.addEventListener("submit", createStudent);
 
 
-const voldemort = [];
+// const voldemort = [];
 
-const expelledToDom = (array) => {
-    let domString ="";
+// const expelledToDom = (array) => {
+//     let domString ="";
 
-    for(const removed of array) {
-        domString += `<div class="card" style="width: 18rem;">
-  <img src="..." class="card-img-top" alt="...">
-  <div class="card-body">
-    <p class="card-text">${removed.name}</p>
-  </div>
-</div>`
-    }
-const voldemortDiv = document.querySelector("#voldemort");
-voldemortDiv.innerHTML = domString
-};
+//     for(const removed of array) {
+//         domString += `<div class="card" style="width: 18rem;">
+//   <img src="..." class="card-img-top" alt="...">
+//   <div class="card-body">
+//     <p class="card-text">${removed.name}</p>
+//   </div>
+// </div>`
+//     }
+// const voldemortDiv = document.querySelector("#voldemort");
+// voldemortDiv.innerHTML = domString
+// };
 
-const expelButton = document.querySelector("#hogwarts");
+// const expelButton = document.querySelector("#hogwarts");
 
-expelButton.addEventListener('click', (e) => {
+// expelButton.addEventListener('click', (e) => {
 
-    if (e.target.id.includes("expel")) {
-        const[,id] = e.target.id.split("--");
-        const index = students.findIndex(e => e.id === Number(id));
-        const removed = students.splice(index, 1);
-        voldemort.push(removed[0]);
-        renderToDom(students);
-        console.log("do I work")
-        expelledToDom(voldemort);
-    }
-})
+//     if (e.target.id.includes("expel")) {
+//         const[,id] = e.target.id.split("--");
+//         const index = students.findIndex(e => e.id === Number(id));
+//         const removed = students.splice(index, 1);
+//         voldemort.push(removed[0]);
+//         renderToDom(students);
+//         console.log("do I work")
+//         expelledToDom(voldemort);
+//     }
+// })
+
+// startApp()
