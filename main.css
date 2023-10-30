@@ -1,0 +1,32 @@
+body{
+    background-color: gray;
+    gap: 100px;
+}
+#app{
+    flex-direction: row;
+    display: flex;
+    flex-wrap: wrap;
+    
+}
+
+.card{
+    width: 400px;
+    height: auto;
+    background-color: white;
+    margin: 10px;
+    border: solid 1px lightblue;
+    display: flex;
+  }
+.button-container{
+    display: flex;
+    justify-content: center;
+    gap: 100px;
+}
+
+
+
+.grid-container {
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    grid-gap: 20px;
+}
