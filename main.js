@@ -39,6 +39,7 @@ const cardsOnDom = (array) => {
     <img src="..." class="card-img-top" alt="...">
     <div class="card-body">
       <p class="card-text">${student.name}</p>
+      <p class="card-text">${student.house}</p>
     </div>
     <button id="expel--${student.id}" class="btn btn-primary">Expel</button>
   </div>`;
@@ -46,10 +47,31 @@ const cardsOnDom = (array) => {
 
   renderToDom("#app", domString)
 };
-const submitButton = document.querySelector("button[type='button']");
+const submitButton = document.querySelector("button[type='submit']");
 submitButton.addEventListener("click", () => {
   cardsOnDom(students);
 });
+
+const form = document.querySelector('form')
+//function to create a new student
+const createStudent = (e) => {
+     e.preventDefault();
+
+   //array for assigning houses
+   let houses = ["gryffindor", "hufflepuff", "ravenclaw", "slytherin"];
+  
+   const newStudentObj = {
+       id: students.length + 1,
+      name: document.querySelector("#name").value,
+      house: houses[Math.floor(Math.random() * houses.length)],
+  };
+   students.push(newStudentObj);
+    console.log(students.length);
+   cardsOnDom(students);
+    form.reset();
+  };
+  
+  form.addEventListener("submit", createStudent);
 
 
 // get form on dom
@@ -94,27 +116,8 @@ submitButton.addEventListener("click", () => {
 
 
 
-//Function to render cards to the DOM that takes an array
 
-// function to create a new student
-// const createStudent = (e) => {
-//      e.preventDefault();
 
-//    //array for assigning houses
-//    let houses = ["gryffindor", "hufflepuff", "ravenclaw", "slytherin"];
-  
-//    const newStudentObj = {
-//        id: students.length + 1,
-//       name: document.querySelector("#studentName").value,
-//       house: houses[Math.floor(Math.random() * houses.length)],
-//   };
-//    students.push(newStudentObj);
-//     console.log(students.length);
-//    cardsOnDom(students);
-//     form.reset();
-//   };
-  
-//   form.addEventListener("submit", createStudent);
   
 
 
