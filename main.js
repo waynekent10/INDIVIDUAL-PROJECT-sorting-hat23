@@ -21,10 +21,13 @@ const students = [
   },
 ];
 
+//empty array for volde's army
+const voldemort = [];
 
-//RenderToDom
+//RenderToDom function 
 const renderToDom = (divId, htmlToRender) => {
     const selectedDiv = document.querySelector(divId);
+
     selectedDiv.innerHTML = htmlToRender;
 }
 
@@ -44,12 +47,15 @@ form.innerHTML += `<form id="studentForm">
 
 
 //TODO: Get the card on the DOM
+
+
 //Function to render cards to the DOM that takes an array
-const studentsOnDom = (students) => {
+const studentsOnDom = (array) => {
   let domString = "";
-  students.forEach((student) => {
-    domString += `<div class="card mb-3" style="max-width: 18rem;">
+  array.forEach((student) => {
+    domString += `<div class="card mb-3" style="max-width: 18rem;" id="hogCard">
         <div class="row g-0">
+        <div id="${student.house}">
           <div class="col-md-4">
            <img src="..." class="img-fluid rounded-start" alt="...">
          </div>
@@ -60,10 +66,12 @@ const studentsOnDom = (students) => {
               <a href="#" class="btn btn-danger" id="expel--${student.id}">Expel</a>
             </div>
           </div>
+          </div>
         </div>
         </div>`;
   })
-renderToDom("#hogwarts", domString);
+renderToDom("#studentCards", domString);
+
 };
 // function to create a new student
 const createStudent = (e) => {
@@ -180,5 +188,6 @@ const createStudent = (e) => {
 //         expelledToDom(voldemort);
 //     }
 // })
-
-// startApp()
+startApp = () => {
+  studentsOnDom(students)
+}
