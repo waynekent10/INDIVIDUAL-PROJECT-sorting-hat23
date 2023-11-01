@@ -22,7 +22,7 @@ const students = [
 ];
 
 //empty array for volde's army
-
+const volde = [];
 
 //RenderToDom function 
 const renderToDom = (divId, htmlToRender) => {
@@ -46,6 +46,8 @@ const cardsOnDom = (array) => {
   }
 
   renderToDom("#app", domString)
+document.querySelector("#app").addEventListener("click", expelStudent);
+
 };
 const submitButton = document.querySelector("button[type='submit']");
 submitButton.addEventListener("click", () => {
@@ -87,38 +89,40 @@ const createStudent = (e) => {
  
 // ;
 
+//TODO: expel button event listener
 
+//TODO: expelled cards on dom
+const expelledCardsOnDom = (array) => {
+  let domString = "";
 
-//TODO: Get the card on the DOM
+  for (const student of array) {
+    domString += `<div class="card" style="width: 18rem;">
+    <img src="..." class="card-img-top" alt="...">
+    <div class="card-body">
+      <p class="card-text">${student.name}</p>
+    </div>
+  </div>`;
+}
+renderToDom("#voldesquad", domString);
+};  
 
+const expelStudent = (e) => {
+  if (e.target.id.includes("expel")) {
+    const id = e.target.id.split("--")[1];
+    const index = students.findIndex(student => student.id === Number(id));
+       
+    if (index !== -1) {
+    const removed = students.splice(index, 1);
+        volde.push(removed[0]);
+        cardsOnDom(students);
+        console.log("do I work")
+        expelledCardsOnDom(volde);
+    }
+  }
+}
 
-// const createStudent = (e) => {
-//   e.preventDefault();
-  
-//   const houses = ["Gryffindor", "Hufflepuff", "Ravenclaw", "Slytherin"];
-  
-//   const newStudentObj = {
-//     id: students.length + 1,
-//     name: document.querySelector("#studentName").value,
-//     house: houses[Math.floor(Math.random() * houses.length)]
-//   }
+cardsOnDom(students)
 
-//   students.push(newStudentObj);
-//   students.sort((a, b) => a.name.localeCompare(b.name));
-//   cardsOnDom(students);
-//   studentForm.reset();  
-// };
-
-
-// form.addEventListener('submit', createStudent);
-
-
-
-
-
-
-
-  
 
 
 
@@ -162,31 +166,11 @@ const createStudent = (e) => {
 // );
 // showAllStudentsButton.addEventListener("click", () => handleFilterClick("all"));
 
-// //creates the form and places form on the dom
-// const form = document.querySelector("form");
-
-// const createStudent = (e) => {
-//   e.preventDefault();
-//  //array for assigning houses
-//   let houses = ["gryffindor", "hufflepuff", "ravenclaw", "slytherin"];
-
-//   const newStudentObj = {
-//     id: students.length + 1,
-//     name: document.querySelector("#name").value,
-//     house: houses[Math.floor(Math.random() * houses.length)],
-//   };
-//   students.push(newStudentObj);
-//   console.log(students.length);
-//   renderToDom(students);
-//   form.reset();
-// };
-
-// form.addEventListener("submit", createStudent);
 
 
-// const voldemort = [];
 
-// const expelledToDom = (array) => {
+
+// const expelled = (array) => {
 //     let domString ="";
 
 //     for(const removed of array) {
