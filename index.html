@@ -9,19 +9,29 @@
 <link rel="stylesheet" href="main.css">
 </head>
 <body>
+    <div class="card text-center">
+        <div class="card-header">
+          <h1>Welcome to H-WARTS</h1>
+        </div>
+        <div class="card-body">
+          <h5 class="card-title">Click the button below so we know where you will sleep!</h5>
+          <p class="card-text">Hurry up! Rooms fill up fast.</p>
+          <a href="#" class="btn btn-primary" id="sort">Lets Sort!</a>
+        </div>
+        <div class="card-footer text-body-secondary">
+          Fast I said!
+        </div>
+      </div>
+
   <!--Form-->  
+
+
   <form>
-    <div class="form-containter">
-        <div class="mb-3 row">
-            <label for="floatingInput" class="col-sm-2 col-form-label">Enter your Name:</label>
-              <input type="text" class="form-control" id="name" required>
-            </div>
-            <button type="submit" class="btn btn-primary">Submit</button>
-    </div>
+   <div id="form"></div> 
 </form>
 <!--Buttons-->
-<div id="button-container">
-    <button type="button" id="allStudents" class="btn btn-secondary">All Students</button>
+<div id="button-filter">
+<button type="button" id="allStudents" class="btn btn-secondary">All Students</button>
     <button type="button" id="gryffindor" class="btn btn-danger">Gryffindor</button>
     <button type="button" id="hufflepuff" class="btn btn-warning">Hufflepuff</button>
     <button type="button" id="ravenclaw" class="btn btn-primary">RavenClaw</button>

@@ -23,6 +23,7 @@ const students = [
 
 //empty array for volde's army
 const volde = [];
+//TODO WELCOME PAGE
 
 //RenderToDom function 
 const renderToDom = (divId, htmlToRender) => {
@@ -49,12 +50,16 @@ const cardsOnDom = (array) => {
 document.querySelector("#app").addEventListener("click", expelStudent);
 
 };
-const submitButton = document.querySelector("button[type='submit']");
-submitButton.addEventListener("click", () => {
-  cardsOnDom(students);
-});
+// const submitButton = document.querySelector("button[type='submit']");
+// submitButton.addEventListener("click", () => {
+//   cardsOnDom(students);
+// });
+//Welcome page function will be around the form to create the start process
+// const beginBtn = document.querySelector("#begin");
+// beginBtn.addEventListener('click',() => {})
 
-const form = document.querySelector('form')
+  const form = document.querySelector('form');
+
 //function to create a new student
 const createStudent = (e) => {
      e.preventDefault();
@@ -77,16 +82,28 @@ const createStudent = (e) => {
 
 
 // get form on dom
-// const form = document.querySelector("#form");
-// form.innerHTML += `<form id="name">
-//   <div class="mb-3">
-//     <label for="name" class="form-label">Name</label>
-//     <input type="text" class="form-control" id="studentName" required>
-//   </div>
-//   </div>
-//   <button type="submit" class="btn btn-primary" id="sortMe">Sort</button>
-// </form>`;
- 
+const formOnDom = () => {
+  domString = "";
+domString += 
+`<form id="begin">
+<div class="mb-3 row">
+            <label for="floatingInput" class="col-sm-2 col-form-label">Enter your Name:</label>
+              <input type="text" class="form-control" id="name" required>
+            </div>
+            <button type="submit" class="btn btn-primary">Submit</button>
+</form>`
+
+renderToDom("#form", domString);
+};
+
+//Function to get the forms with a button click
+const getFormButton = document.querySelector("#sort");
+
+getFormButton.addEventListener('click', () => {
+  formOnDom()
+})
+
+
 // ;
 
 //TODO: expel button event listener
@@ -105,19 +122,21 @@ const expelledCardsOnDom = (array) => {
 }
 renderToDom("#voldesquad", domString);
 };  
-
+//expel student function that moves expelled students into the volde array.
+//Creating the function called expel student
 const expelStudent = (e) => {
+//looks to target the button that has expel in it
   if (e.target.id.includes("expel")) {
-    const id = e.target.id.split("--")[1];
-    const index = students.findIndex(student => student.id === Number(id));
-       
-    if (index !== -1) {
+    //takes the id and splits it into two pieces where there are 2dashes, takes the second piece which becomes unique and stores it as an id
+    const[, id] = e.target.id.split("--");
+    //this goes through the list of students who matches the id
+    const index = students.findIndex(e => e.id === Number(id));
+    //this removes the student from the list of students and places it in removed
     const removed = students.splice(index, 1);
-        volde.push(removed[0]);
-        cardsOnDom(students);
-        console.log("do I work")
-        expelledCardsOnDom(volde);
-    }
+    //then the student that was removed goes into the new array called volde
+    volde.push(removed[0]);
+    cardsOnDom(students)
+    expelledCardsOnDom(volde);
   }
 }
 
@@ -167,35 +186,8 @@ showSlytherinButton.addEventListener("click", () =>
 showAllStudentsButton.addEventListener("click", () => handleFilterClick("all"));
 
 
+const startApp = () => {
+  cardsOnDom(students);
+}
 
-
-
-// const expelled = (array) => {
-//     let domString ="";
-
-//     for(const removed of array) {
-//         domString += `<div class="card" style="width: 18rem;">
-//   <img src="..." class="card-img-top" alt="...">
-//   <div class="card-body">
-//     <p class="card-text">${removed.name}</p>
-//   </div>
-// </div>`
-//     }
-// const voldemortDiv = document.querySelector("#voldemort");
-// voldemortDiv.innerHTML = domString
-// };
-
-// const expelButton = document.querySelector("#hogwarts");
-
-// expelButton.addEventListener('click', (e) => {
-
-//     if (e.target.id.includes("expel")) {
-//         const[,id] = e.target.id.split("--");
-//         const index = students.findIndex(e => e.id === Number(id));
-//         const removed = students.splice(index, 1);
-//         voldemort.push(removed[0]);
-//         renderToDom(students);
-//         console.log("do I work")
-//         expelledToDom(voldemort);
-//     }
-// })
+startApp();
