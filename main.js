@@ -31,7 +31,7 @@ const cardsOnDom = (array) => {
 
   for (const student of array) {
     domString += `<div class="card" style="width: 18rem;">
-    <img src="..." class="card-img-top" alt="...">
+    <img src="${student.image}" class="card-img-top" alt="...">
     <div class="card-body">
       <p class="card-text">${student.name}</p>
       <p class="card-text">${student.house}</p>
@@ -39,7 +39,7 @@ const cardsOnDom = (array) => {
     <button id="expel--${student.id}" class="btn btn-primary">Expel</button>
   </div>`;
   }
- const app = document.querySelector("#hunit");
+ const app = document.querySelector("#app");
   app.innerHTML = domString;
   app.addEventListener("click", expelStudent);
 
@@ -54,6 +54,7 @@ const createStudent = (e) => {
 
   //array for assigning houses
   let houses = ["gryffindor", "hufflepuff", "ravenclaw", "slytherin"];
+   
 
   const newStudentObj = {
     id: students.length + 1,
@@ -100,13 +101,14 @@ const expelledCardsOnDom = (array) => {
 
   for (const student of array) {
     domString += `<div class="card" style="width: 18rem;">
-    <img src="..." class="card-img-top" alt="...">
+    <img src="" class="card-img-top" alt="...">
     <div class="card-body">
       <p class="card-text">${student.name}</p>
     </div>
   </div>`;
   }
-  renderToDom("#voldesquad", domString);
+  const renderToDom = document.querySelector("#voldesquad");
+  renderToDom.innerHTML = domString;
 };
 //expel student function that moves expelled students into the volde array.
 //Creating the function called expel student
