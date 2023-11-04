@@ -17,3 +17,16 @@ gap: 100px;
     border: solid 1px white;
     row-gap: 3px;
 }
+
+#button-container{
+    display: flex;
+    justify-content: center;
+    gap: 100px;
+
+}
+#welcome-container{
+    justify-content: center;
+    display: flex;
+    
+
+}
